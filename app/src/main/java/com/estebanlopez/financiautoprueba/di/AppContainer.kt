@@ -1,6 +1,7 @@
 package com.estebanlopez.financiautoprueba.di
 
 import UsersServices
+import android.util.Log
 import com.estebanlopez.financiautoprueba.model.datasource.UsersRemoteDataSource
 import com.estebanlopez.financiautoprueba.model.repository.UsersRepository
 import okhttp3.Interceptor
@@ -15,6 +16,7 @@ class AppContainer {
         val request =
             chain.request().newBuilder().addHeader("app-id", "63473330c1927d386ca6a3a5")
                 .build();
+        Log.d("REQUEST",request.url().toString())
         chain.proceed(request)
     }.build()
 

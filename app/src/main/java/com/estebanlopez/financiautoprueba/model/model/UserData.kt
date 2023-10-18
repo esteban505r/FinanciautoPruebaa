@@ -1,6 +1,6 @@
 package com.estebanlopez.financiautoprueba.model.model
 
-data class Data(
+data class UserData(
     val firstName: String,
     val id: String,
     val lastName: String,

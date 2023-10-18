@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import com.estebanlopez.financiautoprueba.model.model.Result
+import retrofit2.Response
 
 class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() {
 
@@ -20,5 +21,13 @@ class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() 
             return
         }
         mutableStateFlow.value = Result.Error(response.code(),response.message())
+    }
+
+    suspend fun delete(id: String): Result<Response<Unit>> {
+        val response = usersRepository.delete(id);
+        if(response.isSuccessful){
+            return Result.Success(response)
+        }
+        return Result.Error(response.code(),response.errorBody()?.string())
     }
 }
